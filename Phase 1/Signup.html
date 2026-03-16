@@ -1,59 +1,70 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <header>
-        <h1>School Task Portal</h1>
+        <h1><a href="Homepage.html">School Task Portal</a></h1>
         <nav>
             <ul>
                 <li><a href="Homepage.html">Home</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="Login.html">Log in</a></li>
             </ul>
         </nav>
     </header>
+
     <hr>
 
-<main>
+    <main>
+
         <h2>Create an Account</h2>
-        <form action="login.html" method="GET">
-            
+
+        <form action="Login.html" method="POST">
+
             <fieldset>
                 <legend><strong>Account Information</strong></legend>
-                
+
                 <div>
                     <label for="username">Username:</label><br>
-                    <input type="text" id="username" name="username" placeholder="e.g., hozayfa_ashraf" required autofocus>
+                    <input type="text" id="username" name="username" placeholder="e.g., hozayfa_ashraf" required
+                        autofocus>
                 </div>
                 <br>
-                
+
                 <div>
                     <label for="email">Email Address:</label><br>
                     <input type="email" id="email" name="email" placeholder="hoz@gmail.com" required>
                 </div>
                 <br>
-                
+
                 <div>
                     <label for="password">Password:</label><br>
-                    <input type="password" id="password" name="password" placeholder="Minimum 8 characters" minlength="8" required>
+                    <input type="password" id="password" name="password" placeholder="Minimum 8 characters"
+                        minlength="8" required>
                 </div>
                 <br>
-                
+
                 <div>
                     <label for="confirm_password">Confirm Password:</label><br>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" minlength="8" required>
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        placeholder="Re-enter your password" minlength="8" required>
                 </div>
             </fieldset>
-            
+
             <br>
-            
+
             <fieldset>
                 <legend><strong>Role Selection</strong></legend>
                 <p>Please select your role in the system:</p>
-                
+
                 <div>
                     <input type="radio" id="role_admin" name="is_admin" value="True" required>
                     <label for="role_admin">School Admin</label>
@@ -63,19 +74,47 @@
                     <label for="role_teacher">Teacher</label>
                 </div>
             </fieldset>
-            
+
             <br>
-            
+
             <div>
                 <button type="submit">Complete Sign Up</button>
-                <button type="reset">Clear Form</button> 
+                <button type="reset">Clear Form</button>
             </div>
         </form>
+
+        <br>
+
+        <p><small>Already have an account? <a href="Login.html">Log in here</a>.</small></p>
+
     </main>
+
     <hr>
 
     <footer>
-        <p><small>Already have an account? <a href="login.html">Log in here</a>.</small></p>
+        <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
     </footer>
+
+    <script>
+
+        document.querySelector("form").addEventListener("submit", function(e) {
+            
+        e.preventDefault(); //Prevent form from submitting and refreshing the page (the default action method)
+
+        let username = document.getElementById("username").value;
+        let role = document.querySelector('input[name="is_admin"]:checked').value;
+        let password = document.getElementById("password").value;
+
+        localStorage.setItem("Username", username);
+        localStorage.setItem("Role", role);
+        localStorage.setItem("Password", password);
+
+        window.location.href = "Login.html"; //direct to login page
+
+        });
+        
+    </script>
+
 </body>
+
 </html>

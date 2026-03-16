@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1><a href="AdminDashboard.html">School Task Portal</a></h1>
+        <nav>
+            <ul>
+                <li><a href="Profile.html">Profile</a></li>
+                <li><a href="Homepage.html">Log out</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <hr>
+
+    <main>
+
+        <h2>Admin Dashboard</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Title</th>
+                    <th>Assigned To</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th id="actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Prepare Exam</td>
+                    <td>Mr. Ahmed</td>
+                    <td class = "priority-high">High</td>
+                    <td>Pending</td>
+                    <td>Prepare the final exam questions</td>
+                    <td class = "actions-data">
+                        <a href="EditTask.html" class="btn btn-edit">Edit</a>
+                        <a href="#" class="btn btn-delete">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Grade Papers</td>
+                    <td>Ms. Sara</td>
+                    <td class = "priority-medium">Medium</td>
+                    <td>Pending</td>
+                    <td>Grade the midterm papers</td>
+                    <td class = "actions-data">
+                        <a href="EditTask.html" class="btn btn-edit">Edit</a>
+                        <a href="#" class="btn btn-delete">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="AddTask.html" class="btn btn-addtask">+ Add New Task</a>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
+    </footer>
+
+</body>
+
+</html>

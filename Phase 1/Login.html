@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1><a href="Homepage.html">School Task Portal</a></h1>
+        <nav>
+            <ul>
+                <li><a href="Homepage.html">Home</a></li>
+                <li><a href="Signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <h2>Login</h2>
+
+        <form action="Homepage.html" method="POST">
+
+            <fieldset>
+                <legend><strong>Login Credentials</strong></legend>
+
+                <div>
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <br>
+
+                <div>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+            </fieldset>
+
+            <a href="PasswordReset.html" id="password-reset">Forgot password?</a>
+
+            <div>
+                <button type="submit">Log In</button>
+            </div>
+        </form>
+
+        <br>
+
+        <p><small>Don't have an account yet? <a href="Signup.html">Sign up here</a>.</small></p>
+
+        <div id="alert-overlay">
+            <div id="alert-box">
+                <p> Invalid username or password. Please try again.</p> <br/>
+                <button type= "button" id = "btn-close" class="btn-close">Close</button>
+            </div>
+        </div>
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
+    </footer>
+
+    <script>
+
+        document.querySelector('form').addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if(localStorage.getItem('Username') === username && localStorage.getItem('Password') === password) {
+
+                if(localStorage.getItem('role') === "admin") {
+                    window.location.href = 'AdminDashboard.html';
+                }
+                else {
+                    window.location.href = 'TeacherDashboard.html';
+                }
+
+            }
+            else {
+                document.getElementById('alert-overlay').style.display = 'block';
+                document.getElementById('alert-box').style.display = 'block';
+            }
+
+        });
+
+        document.getElementById('btn-close').addEventListener('click', function() {
+        document.getElementById('alert-overlay').style.display = 'none';
+        document.getElementById('alert-box').style.display = 'none';
+    });
+
+    </script>
+
+</body>
+
+</html>
