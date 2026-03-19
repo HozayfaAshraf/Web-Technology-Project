@@ -1,3 +1,5 @@
+# Project 3 - School Task Assignment Website
+
 Names and IDs:
 
 - Hady Hassan El Fadaly 20236113
@@ -5,7 +7,7 @@ Names and IDs:
 - Omar Waleed El Sobky 20237008
 - Yassin Mohy Eldin 20236118
 
-- Project 3 - School Task Assignment Website
+
 
 Used Colors:
 
