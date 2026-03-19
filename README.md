@@ -7,8 +7,6 @@ Names and IDs:
 - Omar Waleed El Sobky 20237008
 - Yassin Mohy Eldin 20236118
 
-
-
 Used Colors:
 
 - charcoal navy #2c3e50 as primary color (header,buttons)
