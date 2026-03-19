@@ -18,7 +18,7 @@
             <ul>
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="CompletedTasks.html">Completed Tasks</a></li>
-                <li><a href="Homepage.html">Log out</a></li>
+                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
             </ul>
         </nav>
 
@@ -31,10 +31,10 @@
         <h2>Teacher Dashboard</h2>
 
         <form>
-            
-            <input type="text" name="search" placeholder="Search tasks..." class = "search">
+
+            <input type="text" name="search" placeholder="Search tasks..." class="search">
             <label for="sort">Sort by:</label>
-            <select id="sort" name="sort" class= "sort">
+            <select id="sort" name="sort" class="sort">
                 <option value="priority">Priority</option>
                 <option value="status">Status</option>
             </select>
@@ -49,7 +49,6 @@
                 <tr>
                     <th>Task ID</th>
                     <th>Title</th>
-                    <th>Assigned To</th>
                     <th>Priority</th>
                     <th>Status</th>
                     <th>Description</th>
@@ -57,30 +56,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Prepare Exam</td>
-                    <td>Mr. Ahmed</td>
-                    <td class="priority-high">High</td>
-                    <td>Pending</td>
-                    <td>Prepare the final exam questions</td>
-                    <td class="actions-data">
-                        <a href="ViewTask.html" class="btn btn-view">View</a>
-                        <a href="#" class="btn btn-complete">Complete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Grade Papers</td>
-                    <td>Ms. Sara</td>
-                    <td class="priority-medium">Medium</td>
-                    <td>Pending</td>
-                    <td>Grade the midterm papers</td>
-                    <td class="actions-data">
-                        <a href="ViewTask.html" class="btn btn-view">View</a>
-                        <a href="#" class="btn btn-complete">Complete</a>
-                    </td>
-                </tr>
             </tbody>
         </table>
 
@@ -91,6 +66,63 @@
     <footer>
         <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
     </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            let tbody = document.querySelector("tbody");
+            let username = localStorage.getItem("username");
+
+            tasks.forEach(function (task) {
+
+                let row =
+                    `<tr>
+                    <td>${task.id}</td>
+                    <td>${task.title}</td>
+                    <td class="priority-${task.priority.toLowerCase()}">${task.priority}</td>
+                    <td>${task.status}</td>
+                    <td>${task.description}</td>
+                    <td class="actions-data">
+                            <a href="ViewTask.html" class="btn btn-view" data-id="${task.id}">View</a>
+                            <a href="#" class="btn btn-complete" data-id="${task.id}">Complete</a>
+                    </td>
+                `;
+
+                if (task.teacher === username && task.status != "Completed") {
+                    tbody.innerHTML += row;
+                }
+
+            });
+
+
+        });
+
+        document.querySelector("tbody").addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btn-complete")) {
+
+                e.preventDefault();
+
+                //filter out completed task and save back to localStorage
+                let taskId = e.target.getAttribute("data-id");
+                let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+                tasks = tasks.map(function (task) {
+                    if (String(task.id) === String(taskId)) {
+                        task.status = "Completed";
+                    }
+                    return task;
+                });
+
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                location.reload();
+
+            }
+
+        });
+
+    </script>
 
 </body>
 

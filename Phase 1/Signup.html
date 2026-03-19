@@ -16,7 +16,7 @@
         <nav>
             <ul>
                 <li><a href="Homepage.html">Home</a></li>
-                <li><a href="Login.html">Log in</a></li>
+                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
             </ul>
         </nav>
     </header>
@@ -97,19 +97,28 @@
 
     <script>
 
-        document.querySelector("form").addEventListener("submit", function(e) {
-            
-        e.preventDefault(); //Prevent form from submitting and refreshing the page (the default action method)
+        document.querySelector("form").addEventListener("submit", function (e) {
 
-        let username = document.getElementById("username").value;
-        let role = document.querySelector('input[name="is_admin"]:checked').value;
-        let password = document.getElementById("password").value;
+            e.preventDefault(); //Prevent form from submitting and refreshing the page (the default action method)
 
-        localStorage.setItem("username", username);
-        localStorage.setItem("role", role === "True" ? "admin" : "teacher");
-        localStorage.setItem("password", password);
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let role = document.querySelector('input[name="is_admin"]:checked').value;
 
-        window.location.href = "Login.html"; //direct to login page
+            let user = {
+                username: username,
+                email: email,
+                password: password,
+                role: role === "True" ? "admin" : "teacher"
+            };
+
+            // Get existing users or start with empty array
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            users.push(user);
+            localStorage.setItem("users", JSON.stringify(users));
+
+            window.location.href = "Login.html"; //direct to login page
 
         });
 

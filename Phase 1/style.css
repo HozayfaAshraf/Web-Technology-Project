@@ -1,7 +1,9 @@
 * {
 
-    margin: 0; /*Remove default margin from all elements*/
-    padding: 0; /*Remove default padding from all elements*/
+    margin: 0;
+    /*Remove default margin from all elements*/
+    padding: 0;
+    /*Remove default padding from all elements*/
     box-sizing: border-box;
 
 }
@@ -11,11 +13,14 @@
 body {
 
     background-color: #ecf0f1;
-    font-family: Georgia, 'Times New Roman', Times, serif; /*several fonts for when one isnt installed he other is used*/
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    /*several fonts for when one isnt installed he other is used*/
     color: #1e1e1e;
-    min-height: 100vh; /*Ensure the body takes at least the full height of the viewport*/
+    min-height: 100vh;
+    /*Ensure the body takes at least the full height of the viewport*/
     display: flex;
-    flex-direction: column; /*Arrange children (header, main, footer) in a column*/
+    flex-direction: column;
+    /*Arrange children (header, main, footer) in a column*/
 
 }
 
@@ -24,33 +29,42 @@ body {
 header {
 
     background-color: #2c3e50;
-    padding: 15px 30px; /*Top and bottom padding: 15px, left and right padding: 30px*/
-    display: flex; /*Using flexbox to align items horizontally*/
-    justify-content: space-between; /*Space between the logo and the navigation*/
-    align-items: center; /*Vertically center the items in the header*/
+    padding: 15px 30px;
+    /*Top and bottom padding: 15px, left and right padding: 30px*/
+    display: flex;
+    /*Using flexbox to align items horizontally*/
+    justify-content: space-between;
+    /*Space between the logo and the navigation*/
+    align-items: center;
+    /*Vertically center the items in the header*/
 
 }
 
 header h1 a {
 
     color: white;
-    text-decoration: none; /*Remove underline from links*/
+    text-decoration: none;
+    /*Remove underline from links*/
     font-size: 22px;
 
 }
 
 nav ul {
 
-    list-style: none; /*Remove default list styling*/
-    display: flex; /*Using flexbox to align navigation items horizontally*/
-    gap: 20px; /*Add space between navigation items*/
+    list-style: none;
+    /*Remove default list styling*/
+    display: flex;
+    /*Using flexbox to align navigation items horizontally*/
+    gap: 20px;
+    /*Add space between navigation items*/
 
 }
 
 nav a {
 
     color: white;
-    text-decoration: none; /*Remove underline from links*/
+    text-decoration: none;
+    /*Remove underline from links*/
     font-size: 14px;
 
 }
@@ -66,26 +80,32 @@ nav a:hover {
 main {
 
     max-width: 900px;
-    margin: 30px auto; /*Center the main content and add vertical spacing*/
+    margin: 30px auto;
+    /*Center the main content and add vertical spacing*/
     padding: 30px;
-    flex: 1; /*Allow the main content to grow and fill available space between header and footer*/
+    flex: 1;
+    /*Allow the main content to grow and fill available space between header and footer*/
 
 }
 
 main h2 {
 
     font-size: 20px;
-    margin-bottom: 20px; /*Add space below the main heading*/
+    margin-bottom: 20px;
+    /*Add space below the main heading*/
     color: #2c3e50;
-    border-left: #3498db 4px solid; /*Add a left border to the main heading*/
-    padding-left: 10px; /*Add space between the border and the text*/
+    border-left: #3498db 4px solid;
+    /*Add a left border to the main heading*/
+    padding-left: 10px;
+    /*Add space between the border and the text*/
 
 }
 
 main h3 {
 
     font-size: 18px;
-    margin-bottom: 10px; /*Add space below the main heading*/
+    margin-bottom: 10px;
+    /*Add space below the main heading*/
     color: #2c3e50;
 
 }
@@ -93,63 +113,81 @@ main h3 {
 a {
 
     color: #3498db;
-    text-decoration: none; /*Remove underline from links*/
+    text-decoration: none;
+    /*Remove underline from links*/
 
 }
 
 #password-reset {
 
     color: #1e1e1e;
-    text-decoration: none; /*Remove underline from links*/
+    text-decoration: none;
+    /*Remove underline from links*/
     font-size: 14px;
-    cursor: pointer; /*Change cursor to pointer on hover*/
-    text-align: center; /*Center the link horizontally*/
-    margin-bottom: 10px; /*Add space below the link*/
-    display: block; /*Allow the link to be styled as a block element for better spacing*/
+    cursor: pointer;
+    /*Change cursor to pointer on hover*/
+    text-align: center;
+    /*Center the link horizontally*/
+    margin-bottom: 10px;
+    /*Add space below the link*/
+    display: block;
+    /*Allow the link to be styled as a block element for better spacing*/
 
 }
 
 p {
 
-    margin-bottom: 10px; /*Add space below paragraphs*/
+    margin-bottom: 10px;
+    /*Add space below paragraphs*/
 
 }
 
 .copyrights {
 
-    margin-top: 5px; /*Add space above the copyrights text*/
-    align-items: center; /*Vertically center the copyrights text in the footer*/
+    margin-top: 5px;
+    /*Add space above the copyrights text*/
+    align-items: center;
+    /*Vertically center the copyrights text in the footer*/
 
 }
 
 #alert-overlay {
 
-    position: fixed; /* Stays in place if scroll */
+    position: fixed;
+    /* Stays in place if scroll */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /*Semi-transparent black background*/
-    display: none; /*Hide the overlay by default*/
-    justify-content: center; /*Center the alert box horizontally*/
-    align-items: center; /*Center the alert box vertically*/
+    background-color: rgba(0, 0, 0, 0.5);
+    /*Semi-transparent black background*/
+    display: none;
+    /*Hide the overlay by default*/
+    justify-content: center;
+    /*Center the alert box horizontally*/
+    align-items: center;
+    /*Center the alert box vertically*/
 
 }
 
 #alert-box {
 
-    display: none; /*Hide the alert box by default*/
-    background-color: #ffffff; 
+    display: none;
+    /*Hide the alert box by default*/
+    background-color: #ffffff;
     border: 1px solid #e74c3c;
     padding: 30px;
     border-radius: 8px;
     margin-top: 15px;
     font-size: 14px;
-    position: absolute; /*removes the element from the normal page flow so it doesn't push or stretch anything when it appears.*/
+    position: absolute;
+    /*removes the element from the normal page flow so it doesn't push or stretch anything when it appears.*/
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centers the box perfectly */
-    text-align: center; /*Center the text inside the alert box*/
+    transform: translate(-50%, -50%);
+    /* Centers the box perfectly */
+    text-align: center;
+    /*Center the text inside the alert box*/
 
 }
 
@@ -158,10 +196,13 @@ p {
 table {
 
     width: 100%;
-    border-collapse: collapse; /*Remove space between table cells*/
+    border-collapse: collapse;
+    /*Remove space between table cells*/
     background-color: white;
-    border-radius: 6px; /*Rounded corners for the table*/
-    overflow: hidden; /*Ensure the rounded corners are visible*/
+    border-radius: 6px;
+    /*Rounded corners for the table*/
+    overflow: hidden;
+    /*Ensure the rounded corners are visible*/
 
 }
 
@@ -175,43 +216,50 @@ thead {
 
 thead th {
 
-    padding: 7.5px 15px; /*Add padding to table headers*/
+    padding: 7.5px 15px;
+    /*Add padding to table headers*/
     font-size: 14px;
 
 }
 
 tbody td {
 
-    border-bottom: 1px solid #ecf0f1; /*Add a light border between rows*/
+    border-bottom: 1px solid #ecf0f1;
+    /*Add a light border between rows*/
     font-size: 12px;
-    padding: 7.5px 15px; /*Add padding to table cells*/
+    padding: 7.5px 15px;
+    /*Add padding to table cells*/
 
 }
 
 .priority-high {
-    
-    color: #e74c3c; /*Red color for high priority*/
+
+    color: #e74c3c;
+    /*Red color for high priority*/
     font-weight: bold;
 
 }
 
-.priority-medium{
-    
-    color: #f39c12; /*Orange color for medium priority*/
+.priority-medium {
+
+    color: #f39c12;
+    /*Orange color for medium priority*/
     font-weight: bold;
 
 }
 
 .priority-low {
-    
-    color: #27ae60; /*Green color for low priority*/
+
+    color: #27ae60;
+    /*Green color for low priority*/
     font-weight: bold;
 
 }
 
 /*Buttons*/
 
-button, .btn {
+button,
+.btn {
 
     padding: 5px 10px;
     margin-top: 5px;
@@ -219,8 +267,10 @@ button, .btn {
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
-    text-decoration: none; /*Remove underline from buttons that are links*/
-    display: inline-block; /*Allow buttons to be styled as links*/
+    text-decoration: none;
+    /*Remove underline from buttons that are links*/
+    display: inline-block;
+    /*Allow buttons to be styled as links*/
 
 }
 
@@ -251,7 +301,7 @@ button, .btn {
     background-color: #3498db;
     color: white;
     margin-top: 15px;
-    
+
 }
 
 
@@ -259,7 +309,7 @@ button, .btn {
 
     background-color: hsl(204, 65%, 48%);
     color: white;
-    
+
 }
 
 .btn-view {
@@ -304,6 +354,21 @@ button, .btn {
 
 }
 
+.btn-cancel {
+
+    width: 100%;
+    background-color: #e74c3c;
+    color: white;
+
+}
+
+.btn-cancel:hover {
+
+    background-color: #c0392b;
+    color: white;
+
+}
+
 button[type="submit"] {
 
     width: 100%;
@@ -320,7 +385,7 @@ button[type="submit"]:hover {
 }
 
 button[type="reset"] {
-    
+
     width: 100%;
     background-color: #e74c3c;
     color: white;
@@ -365,6 +430,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
 select {
 
     width: 100%;
@@ -378,38 +444,59 @@ select {
 
 }
 
-input[type="radio"]
-{
+input[type="radio"] {
 
     margin-right: 5px;
-    accent-color: #3498db; /*Change the color of radio buttons to match the theme*/
+    accent-color: #3498db;
+    /*Change the color of radio buttons to match the theme*/
 
 }
 
-input[type="text"].search{
+input[type="text"].search {
 
-    width: 50%; /*Allow the search input to shrink to fit its content*/
+    width: 50%;
+    /*Allow the search input to shrink to fit its content*/
     background-color: #ffffff;
-    outline: none; /*Remove default focus outline*/
-    border-color: #3498db; /*Change border color on focus*/
+    outline: none;
+    /*Remove default focus outline*/
+    border-color: #3498db;
+    /*Change border color on focus*/
 
 }
 
-select.sort{
+#description {
 
-    width: 42.5%; /*Allow the search input to shrink to fit its content*/
+    width: 100%;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #1e1e1e;
+
+
+}
+
+select.sort {
+
+    width: 38.7%;
+    /*Allow the search input to shrink to fit its content*/
     background-color: #ffffff;
-    outline: none; /*Remove default focus outline*/
-    border-color: #3498db; /*Change border color on focus*/
+    outline: none;
+    /*Remove default focus outline*/
+    border-color: #3498db;
+    /*Change border color on focus*/
 
 }
 
 input:focus,
-select:focus 
-{
+select:focus {
 
-    outline: none; /*Remove default focus outline*/
-    border-color: #3498db; /*Change border color on focus*/
+    outline: none;
+    /*Remove default focus outline*/
+    border-color: #3498db;
+    /*Change border color on focus*/
     background-color: #ffffff;
 
 }
@@ -421,6 +508,7 @@ footer {
     background-color: #2c3e50;
     color: white;
     text-align: left;
-    padding: 15px 30px; /*Top and bottom padding: 15px, left and right padding: 30px*/
-  
+    padding: 15px 30px;
+    /*Top and bottom padding: 15px, left and right padding: 30px*/
+
 }

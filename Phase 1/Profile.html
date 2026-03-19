@@ -13,11 +13,11 @@
 
     <header>
 
-        <h1><a href="AdminDashboard.html">School Task Portal</a></h1>
+        <h1><a href="#">School Task Portal</a></h1>
         <nav>
             <ul>
-                <li><a href="AdminDashboard.html">Dashboard</a></li>
-                <li><a href="Homepage.html">Log out</a></li>
+                <li><a href="#" id="dashboard-link">Dashboard</a></li>
+                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
             </ul>
         </nav>
 
@@ -27,6 +27,17 @@
 
     <main>
 
+        <h2>My Profile</h2>
+
+        <fieldset>
+            <legend>Account Details</legend>
+            <p id="profile-username"></p>
+            <br>
+            <p id="profile-email"></p>
+            <br>
+            <p id="profile-role"></p>
+        </fieldset>
+
     </main>
 
     <hr>
@@ -34,6 +45,36 @@
     <footer>
         <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
     </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            let username = localStorage.getItem('username');
+            let role = localStorage.getItem('role');
+            let dashboard = role === "admin" ? "AdminDashboard.html" : "TeacherDashboard.html";
+
+            document.querySelector("header h1 a").href = dashboard;
+            document.getElementById("dashboard-link").href = dashboard;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let user = users.find(function(u) {
+                return u.username === username;
+            })
+
+            if (user)
+            {
+
+                let role1 = user.role === "admin" ? "School Admin" : "Teacher";
+
+                document.getElementById("profile-username").innerHTML = `<strong>Username: </strong> ${user.username}`;
+                document.getElementById("profile-email").innerHTML = `<strong>Email: </strong> ${user.email}`;
+                document.getElementById("profile-role").innerHTML = `<strong>Role: </strong> ${role1}`;
+            }
+
+        });
+
+    </script>
 
 </body>
 

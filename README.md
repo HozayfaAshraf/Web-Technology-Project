@@ -8,18 +8,16 @@ Used Colors:
 
 Finished Pages:
 
-- Login
-- Signup
-- HomePage
-- AdminDashboard
-- TeacherDashboard
-
-IN progress (sobky)
-- AddTask
-- CompletedTasks
-- EditTask
+- Login (Hoz)
+- Signup (Hoz)
+- HomePage (Hoz)
+- AdminDashboard (Hady)
+- TeacherDashboard (Hady)
+- Profile (Hady)
+- AddTask (Sobky)
+- CompletedTasks (Sobky)
+- EditTask (Sobky)
 
 Not Finished Pages:
 - PasswordReset
-- Profile
 - ViewTask

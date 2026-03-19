@@ -17,7 +17,7 @@
         <nav>
             <ul>
                 <li><a href="Profile.html">Profile</a></li>
-                <li><a href="Homepage.html">Log out</a></li>
+                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
             </ul>
         </nav>
 
@@ -42,31 +42,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Prepare Exam</td>
-                    <td>Mr. Ahmed</td>
-                    <td class = "priority-high">High</td>
-                    <td>Pending</td>
-                    <td>Prepare the final exam questions</td>
-                    <td class = "actions-data">
-                        <a href="EditTask.html" class="btn btn-edit">Edit</a>
-                        <a href="#" class="btn btn-delete">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Grade Papers</td>
-                    <td>Ms. Sara</td>
-                    <td class = "priority-medium">Medium</td>
-                    <td>Pending</td>
-                    <td>Grade the midterm papers</td>
-                    <td class = "actions-data">
-                        <a href="EditTask.html" class="btn btn-edit">Edit</a>
-                        <a href="#" class="btn btn-delete">Delete</a>
-                    </td>
-                </tr>
+                <!-- Task rows will be dynamically inserted here -->
             </tbody>
+
         </table>
 
         <a href="AddTask.html" class="btn btn-addtask">+ Add New Task</a>
@@ -77,6 +55,62 @@
     <footer>
         <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
     </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            let tbody = document.querySelector("tbody");
+
+            tasks.forEach(function (task) {
+
+                let row =
+                    `<tr>
+                    <td>${task.id}</td>
+                    <td>${task.title}</td>
+                    <td>${task.teacher}</td>
+                    <td class="priority-${task.priority.toLowerCase()}">${task.priority}</td>
+                    <td>${task.status}</td>
+                    <td>${task.description}</td>
+                    <td class = "action-data">
+                        <a href="EditTask.html" class="btn btn-edit" data-id="${task.id}">Edit</a> 
+                        <a href="#" class="btn btn-delete" data-id="${task.id}">Delete</a>
+                    </td>
+                `;
+
+                tbody.innerHTML += row;
+
+            });
+
+
+        });
+
+        document.querySelector("tbody").addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btn-delete")) {
+
+                e.preventDefault();
+
+                //filter out deleted task and save back to localStorage
+                let taskId = e.target.getAttribute("data-id");
+                let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+                tasks = tasks.filter(function (task) {
+                    return String(task.id) !== String(taskId);
+                });
+
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                location.reload();
+
+            }
+            else if (e.target.classList.contains("btn-edit")) {
+                let taskId = e.target.getAttribute("data-id");
+                localStorage.setItem("editTaskId", taskId);
+            }
+
+        });
+
+    </script>
 
 </body>
 

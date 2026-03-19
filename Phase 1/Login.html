@@ -56,8 +56,8 @@
 
         <div id="alert-overlay">
             <div id="alert-box">
-                <p> Invalid username or password. Please try again.</p> <br/>
-                <button type= "button" id = "btn-close" class="btn-close">Close</button>
+                <p> Invalid username or password. Please try again.</p> <br />
+                <button type="button" id="btn-close" class="btn-close">Close</button>
             </div>
         </div>
 
@@ -78,27 +78,32 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if(localStorage.getItem('username') === username && localStorage.getItem('password') === password) {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let found = users.find(function (u) {
+                return u.username === username && u.password === password;
+            });
 
-                if(localStorage.getItem('role') === "admin") {
-                    window.location.href = 'AdminDashboard.html';
+            if (found) {
+                localStorage.setItem("username", found.username);
+                localStorage.setItem("role", found.role);
+
+                if (found.role === "admin") {
+                    window.location.href = "AdminDashboard.html";
                 }
                 else {
-                    window.location.href = 'TeacherDashboard.html';
+                    window.location.href = "TeacherDashboard.html";
                 }
-
-            }
-            else {
+            } else {
                 document.getElementById('alert-overlay').style.display = 'block';
                 document.getElementById('alert-box').style.display = 'block';
             }
 
         });
 
-        document.getElementById('btn-close').addEventListener('click', function() {
-        document.getElementById('alert-overlay').style.display = 'none';
-        document.getElementById('alert-box').style.display = 'none';
-    });
+        document.getElementById('btn-close').addEventListener('click', function () {
+            document.getElementById('alert-overlay').style.display = 'none';
+            document.getElementById('alert-box').style.display = 'none';
+        });
 
     </script>
 

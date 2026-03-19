@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -12,22 +11,39 @@
 <body>
 
     <header>
-
         <h1><a href="TeacherDashboard.html">School Task Portal</a></h1>
         <nav>
             <ul>
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="TeacherDashboard.html">Dashboard</a></li>
-                <li><a href="Homepage.html">Log out</a></li>
+                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
             </ul>
         </nav>
-
     </header>
 
     <hr>
 
     <main>
+        <section class="table-container">
+            <h2>My Completed Tasks</h2>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task ID</th>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                        <th id="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Task rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+
+        </section>
     </main>
 
     <hr>
@@ -35,6 +51,38 @@
     <footer>
         <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
     </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            let tbody = document.querySelector("tbody");
+
+            tasks.forEach(function (task) {
+
+                let row =
+                    `<tr>
+                    <td>${task.id}</td>
+                    <td>${task.title}</td>
+                    <td class="priority-${task.priority.toLowerCase()}">${task.priority}</td>
+                    <td>${task.status}</td>
+                    <td>${task.description}</td>
+                    <td class="actions-data">
+                            <a href="ViewTask.html" class="btn btn-view" data-id="${task.id}">View</a>
+                    </td>
+                `;
+
+                if (task.status === "Completed" && task.teacher === localStorage.getItem("username")) {
+                    tbody.innerHTML += row;
+                }
+
+            });
+
+
+        });
+
+    </script>
 
 </body>
 

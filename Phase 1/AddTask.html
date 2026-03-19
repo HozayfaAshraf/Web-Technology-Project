@@ -12,23 +12,73 @@
 <body>
 
     <header>
-
         <h1><a href="AdminDashboard.html">School Task Portal</a></h1>
         <nav>
             <ul>
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="AdminDashboard.html">Dashboard</a></li>
-                <li><a href="Homepage.html">Log out</a></li>
+                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
             </ul>
         </nav>
-
     </header>
 
     <hr>
 
     <main>
+        <section class="form-container">
 
+            <h2>Create a New Task</h2>
+            <p>Fill out the details below to assign a new task to a teacher.</p>
 
+            <form action="AdminDashboard.html" method="GET">
+                <fieldset>
+                    <legend>Task Details</legend>
+
+                    <div>
+                        <label for="taskId">Task ID:</label><br>
+                        <input type="number" id="taskId" name="taskId" placeholder="e.g., 101" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="taskTitle">Task Title:</label><br>
+                        <input type="text" id="taskTitle" name="taskTitle" placeholder="Enter task title" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="teacherName">Assign to Teacher:</label><br>
+                        <select id="teacherName" name="teacherName" required>
+                            <option value="" disabled selected>Select a Teacher...</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="priority">Priority Level:</label><br>
+                        <select id="priority" name="priority" required>
+                            <option value="" disabled selected>Select Priority...</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="description">Task Description:</label><br>
+                        <textarea id="description" name="description" rows="5"
+                            placeholder="Write task descripition"></textarea>
+                    </div>
+                </fieldset>
+                <br>
+
+                <div class="form-actions">
+                    <button type="submit">Submit Task</button>
+                    <button type="reset">Clear Form</button>
+                </div>
+            </form>
+        </section>
     </main>
 
     <hr>
@@ -36,6 +86,53 @@
     <footer>
         <p class="copyrights"><small>&copy; 2026 School Task Portal. All rights reserved.</small></p>
     </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let select = document.getElementById("teacherName");
+
+            users.forEach(function (user) {
+                if (user.role === "teacher") {
+                    let option = document.createElement("option");
+                    option.value = user.username;
+                    option.textContent = user.username;
+                    select.appendChild(option);
+                }
+            });
+        });
+
+        document.querySelector('form').addEventListener('submit', function (e) {
+
+            e.preventDefault(); //Prevent form from submitting
+
+            let task =
+            {
+
+                id: document.getElementById('taskId').value,
+                title: document.getElementById('taskTitle').value,
+                teacher: document.getElementById('teacherName').value,
+                priority: document.getElementById('priority').value,
+                description: document.getElementById('description').value,
+                status: "Pending"
+
+            }
+
+            //Get existing tasks or start with empty array
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            tasks.push(task); //Add new task to array
+            localStorage.setItem('tasks', JSON.stringify(tasks)); //Save back to localStorage
+
+
+            // Optionally, reset the form after submission
+            this.reset();
+
+        });
+
+
+    </script>
 
 </body>
 
