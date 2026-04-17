@@ -16,7 +16,9 @@
             <ul>
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="TeacherDashboard.html">Dashboard</a></li>
-                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
+                <li><a href="#"
+                        onclick="sessionStorage.removeItem('username'); sessionStorage.removeItem('role'); window.location.href='Homepage.html';">Log
+                        out</a></li>
             </ul>
         </nav>
     </header>
@@ -54,6 +56,10 @@
 
     <script>
 
+        if (!sessionStorage.getItem("username")) {
+            window.location.href = "Login.html";
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
 
             let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -73,7 +79,7 @@
                     </td>
                 `;
 
-                if (task.status === "Completed" && task.teacher === localStorage.getItem("username")) {
+                if (task.status === "Completed" && task.teacher === sessionStorage.getItem("username")) {
                     tbody.innerHTML += row;
                 }
 
@@ -82,9 +88,9 @@
 
         });
 
-        document.querySelector("tbody").addEventListener("click", function(e) {
+        document.querySelector("tbody").addEventListener("click", function (e) {
 
-            if(e.target.classList.contains("btn-view")){
+            if (e.target.classList.contains("btn-view")) {
                 let taskId = e.target.getAttribute("data-id");
                 localStorage.setItem("viewTaskId", taskId);
             }

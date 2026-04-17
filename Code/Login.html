@@ -84,8 +84,8 @@
             });
 
             if (found) {
-                localStorage.setItem("username", found.username);
-                localStorage.setItem("role", found.role);
+                sessionStorage.setItem("username", found.username);
+                sessionStorage.setItem("role", found.role);
 
                 if (found.role === "admin") {
                     window.location.href = "AdminDashboard.html";

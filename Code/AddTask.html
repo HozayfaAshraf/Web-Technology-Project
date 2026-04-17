@@ -17,7 +17,9 @@
             <ul>
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="AdminDashboard.html">Dashboard</a></li>
-                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
+                <li><a href="#"
+                        onclick="sessionStorage.removeItem('username'); sessionStorage.removeItem('role'); window.location.href='Homepage.html';">Log
+                        out</a></li>
             </ul>
         </nav>
     </header>
@@ -79,6 +81,14 @@
                 </div>
             </form>
         </section>
+
+        <div id="alert-overlay">
+            <div id="alert-box">
+                <p> Task ID already exists. Please choose a unique ID.</p> <br />
+                <button type="button" id="btn-close" class="btn-close">Close</button>
+            </div>
+        </div>
+
     </main>
 
     <hr>
@@ -88,6 +98,10 @@
     </footer>
 
     <script>
+
+        if (!sessionStorage.getItem("username")) {
+            window.location.href = "Login.html";
+        }
 
         document.addEventListener("DOMContentLoaded", function () {
             let users = JSON.parse(localStorage.getItem("users")) || [];
@@ -121,16 +135,28 @@
 
             //Get existing tasks or start with empty array
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            let found = tasks.find(function (t) {
+                return t.id === task.id;
+            });
+
+            if (found) {
+                document.getElementById('alert-overlay').style.display = 'block';
+                document.getElementById('alert-box').style.display = 'block';
+                return;
+            }
 
             tasks.push(task); //Add new task to array
             localStorage.setItem('tasks', JSON.stringify(tasks)); //Save back to localStorage
-
 
             // Optionally, reset the form after submission
             this.reset();
 
         });
 
+        document.getElementById('btn-close').addEventListener('click', function () {
+            document.getElementById('alert-overlay').style.display = 'none';
+            document.getElementById('alert-box').style.display = 'none';
+        });
 
     </script>
 

@@ -17,7 +17,9 @@
         <nav>
             <ul>
                 <li><a href="#" id="dashboard-link">Dashboard</a></li>
-                <li><a href="#" onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log out</a></li>
+                <li><a href="#"
+                        onclick="sessionStorage.removeItem('username'); sessionStorage.removeItem('role'); window.location.href='Homepage.html';">Log
+                        out</a></li>
             </ul>
         </nav>
 
@@ -48,22 +50,25 @@
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", function() {
+        if (!sessionStorage.getItem("username")) {
+            window.location.href = "Login.html";
+        }
 
-            let username = localStorage.getItem('username');
-            let role = localStorage.getItem('role');
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let username = sessionStorage.getItem('username');
+            let role = sessionStorage.getItem('role');
             let dashboard = role === "admin" ? "AdminDashboard.html" : "TeacherDashboard.html";
 
             document.querySelector("header h1 a").href = dashboard;
             document.getElementById("dashboard-link").href = dashboard;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
-            let user = users.find(function(u) {
+            let user = users.find(function (u) {
                 return u.username === username;
             })
 
-            if (user)
-            {
+            if (user) {
 
                 let role1 = user.role === "admin" ? "School Admin" : "Teacher";
 

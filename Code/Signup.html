@@ -87,6 +87,13 @@
 
         <p><small>Already have an account? <a href="Login.html">Log in here</a>.</small></p>
 
+        <div id="alert-overlay">
+            <div id="alert-box">
+                <p class = "alert-message"></p> <br />
+                <button type="button" id="btn-close" class="btn-close">Close</button>
+            </div>
+        </div>
+
     </main>
 
     <hr>
@@ -104,7 +111,27 @@
             let username = document.getElementById("username").value;
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm_password").value;
             let role = document.querySelector('input[name="is_admin"]:checked').value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let found = users.find(function (u) {
+                return u.username === username || u.email === email;
+            });
+
+            if (found) {
+                document.querySelector(".alert-message").textContent = "Username or email already exists. Please choose a different one.";
+                document.getElementById('alert-overlay').style.display = 'block';
+                document.getElementById('alert-box').style.display = 'block';
+                return; // Stop further execution if user already exists
+            }
+
+            if (password !== confirmPassword) {
+                document.querySelector(".alert-message").textContent = "Passwords do not match. Please try again.";
+                document.getElementById('alert-overlay').style.display = 'block';
+                document.getElementById('alert-box').style.display = 'block';
+                return; // Stop further execution if passwords do not match
+            }
 
             let user = {
                 username: username,
@@ -113,13 +140,16 @@
                 role: role === "True" ? "admin" : "teacher"
             };
 
-            // Get existing users or start with empty array
-            let users = JSON.parse(localStorage.getItem("users")) || [];
             users.push(user);
             localStorage.setItem("users", JSON.stringify(users));
 
             window.location.href = "Login.html"; //direct to login page
 
+        });
+
+        document.getElementById('btn-close').addEventListener('click', function () {
+            document.getElementById('alert-overlay').style.display = 'none';
+            document.getElementById('alert-box').style.display = 'none';
         });
 
     </script>

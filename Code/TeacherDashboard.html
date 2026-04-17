@@ -19,7 +19,7 @@
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="CompletedTasks.html">Completed Tasks</a></li>
                 <li><a href="#"
-                        onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log
+                        onclick="sessionStorage.removeItem('username'); sessionStorage.removeItem('role'); window.location.href='Homepage.html';">Log
                         out</a></li>
             </ul>
         </nav>
@@ -73,11 +73,15 @@
 
     <script>
 
+        if (!sessionStorage.getItem("username")) {
+            window.location.href = "Login.html";
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
 
             let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
             let tbody = document.querySelector("tbody");
-            let username = localStorage.getItem("username");
+            let username = sessionStorage.getItem("username");
 
             tasks.forEach(function (task) {
 
@@ -123,11 +127,46 @@
                 location.reload();
 
             }
-            else if(e.target.classList.contains("btn-view")){
+            else if (e.target.classList.contains("btn-view")) {
                 let taskId = e.target.getAttribute("data-id");
                 localStorage.setItem("viewTaskId", taskId);
             }
 
+        });
+        document.querySelector("form").addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            let searchTerm = document.querySelector(".search").value.toLowerCase();
+            let sortOption = document.querySelector(".sort").value;
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            let tbody = document.querySelector("tbody");
+            tbody.innerHTML = "";
+
+            if (sortOption) {
+                tasks.sort(function (a, b) {
+                    if (a[sortOption] < b[sortOption]) return -1;
+                    if (a[sortOption] > b[sortOption]) return 1;
+                    return 0;
+                });
+            }
+
+            tasks.forEach(function (task) {
+                if ((task.title.toLowerCase().includes(searchTerm) || task.description.toLowerCase().includes(searchTerm)) && task.teacher === sessionStorage.getItem("username") && task.status != "Completed") {
+                    let row = `<tr>
+                <td>${task.id}</td>
+                <td>${task.title}</td>
+                <td class="priority-${task.priority.toLowerCase()}">${task.priority}</td>
+                <td>${task.status}</td>
+                <td>${task.description}</td>
+                <td class="actions-data">
+                    <a href="ViewTask.html" class="btn btn-view btn-primary" data-id="${task.id}">View</a>
+                    <a href="#" class="btn btn-complete" data-id="${task.id}">Complete</a>
+                </td>
+            </tr>`;
+                    tbody.innerHTML += row;
+                }
+            });
         });
 
     </script>

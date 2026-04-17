@@ -16,7 +16,7 @@
                 <li><a href="Profile.html">Profile</a></li>
                 <li><a href="TeacherDashboard.html">Dashboard</a></li>
                 <li><a href="#"
-                        onclick="localStorage.removeItem('username'); localStorage.removeItem('role'); window.location.href='Homepage.html';">Log
+                        onclick="sessionStorage.removeItem('username'); sessionStorage.removeItem('role'); window.location.href='Homepage.html';">Log
                         out</a></li>
             </ul>
         </nav>
@@ -58,6 +58,10 @@
     </footer>
 
     <script>
+
+        if (!sessionStorage.getItem("username")) {
+            window.location.href = "Login.html";
+        }
 
         function loadTask(id) {
 
